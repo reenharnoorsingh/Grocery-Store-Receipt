@@ -105,7 +105,7 @@ int main()
         inventory[i].totItemSold = 0;
         inventory[i].totSales = 0.0;
     }
-    //	Use Case 01
+    //	Category Names
     FILE *catData = fopen("CategoryName.dat", "r"); //reads "CategoryName.dat"
     while (!feof(catData)){                         //tests the end of file for catName
         fscanf(catData, "%d\t", &code);
@@ -114,7 +114,7 @@ int main()
         fgets(inventory[(code / 100) - 1].CategoryName, 30, catData);
         inventory[(code / 100) - 1].CategoryName[strlen(inventory[(code / 100) - 1].CategoryName) - 2] = '\0';
     }
-    //	Use Case 02
+    //	Code Names and Prices
     FILE *productData = fopen("CodeNamePrice.dat", "r"); // reads "CodeNamePrice.dat"
     while (!feof(productData)){
         fscanf(productData, "%d\t", &code);
@@ -125,7 +125,7 @@ int main()
         ITEM *item = ItemCreate(code, itemName, itemPrice); //	Adding item to linked list
         addItems(&(inventory[(code / 100) - 1].items), item);
     }
-    //	Use Case 03
+    //	Input Data Format
     FILE *customerData = fopen("DailyTransactions.dat", "r"); //reads "DailyTransactions.dat"
     ITEM *customerList = NULL;
     ITEM *customerItem = NULL;
@@ -150,7 +150,7 @@ int main()
         }
         else
         {
-            //	Use Case 04
+            //	 Creates Receipt for the customer
             printf("\nCustomer Reciept # %d\n", customerNo++);
             printf("%-10s%-20s%-10s%-10s%s\n", "Code", "Item Name", "Price", "Num Item", "Total Sales");
             customerItem = customerList;
@@ -164,7 +164,7 @@ int main()
         }
     }
 
-    //	Use Case 05
+    //	Creates Inventory Report
     char catCode[] = "000";
     char catFile[] = "Inventory000.dat"; //category file
     for (i = 0; i < 8; i++)
@@ -193,7 +193,7 @@ int main()
     fclose(productData);
     fclose(customerData);
 
-    //	Use Case 06
+    //	Creates the day's Summary Report
     printf("\n");
     printf("Daily Summary Report\n");
     printf("%-10s%-20s%-20s%s\n", "Code", "Category Name", "#Items Sold", "Total Sales");
